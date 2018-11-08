@@ -4,14 +4,7 @@ $_POST["id"] = 1;
 $_POST["name"] = "admin";
 
 /* Connexion à une base MySQL avec l'invocation de pilote */
-require_once("database_secrets.php");
-
-try {
-    $pdo = new PDO($dsn, $user, $password);
-} catch (PDOException $e) {
-    echo 'Connexion échouée : ' . $e->getMessage();
-    die();
-}
+$pdo = require_once(__DIR__."/connect_database.php");
 
 $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 
@@ -22,21 +15,24 @@ $userId = intval($_POST["id"]);
 
 //Préparation de la requête
 $query = $pdo->prepare("SELECT * FROM user WHERE id = :foo ");
+
 //Paramétrage de la requête par référence.
 $query->bindParam( ":foo", $userId, PDO::PARAM_INT);
 
-//Exécution de la requête
+//Exécution de la requête.
 $query->execute();
 
-//Récupération du premier résultat
+//Récupération du premier résultat.
 $results = $query->fetch(PDO::FETCH_ASSOC);
 
 echo "<h4>1ère requête.</h4>";
+
 var_dump($results);
 
 //Modification de la valeur à la référence paramétrée pour le champ :foo de la requête
 $userId++;
-//Deuxième exécution de la requête
+
+//Deuxième exécution de la requête.
 $query->execute();
 
 //Récupération du nouveau résultat

